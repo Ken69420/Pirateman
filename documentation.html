@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Downloader API Documentation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 2rem;
+        background-color: #f9f9f9;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      code {
+        background: #eee;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+      pre {
+        background: #eee;
+        padding: 1rem;
+        overflow-x: auto;
+        border-radius: 4px;
+      }
+      section {
+        margin-bottom: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>YouTube Downloader API</h1>
+    <p>
+      Self-hosted API to download YouTube videos using yt-dlp, with real-time
+      progress tracking via WebSocket and file management via REST.
+    </p>
+
+    <section>
+      <h2>Base URL</h2>
+      <p><code>http://localhost:8000</code></p>
+    </section>
+
+    <section>
+      <h2>📥 POST /download</h2>
+      <p>Queue a video for download.</p>
+      <h3>Request Body (JSON)</h3>
+      <pre>
+{
+  "url": "https://www.youtube.com/watch?v=VIDEO_ID"
+}</pre
+      >
+      <h3>Response</h3>
+      <pre>
+{
+  "jobId": "abc123",
+  "message": "Download job queued."
+}</pre
+      >
+    </section>
+
+    <section>
+      <h2>📊 GET /status/:jobId</h2>
+      <p>Check the status of a download job.</p>
+      <h3>Example</h3>
+      <code>/status/abc123</code>
+      <h3>Response</h3>
+      <pre>
+{
+  "status": "completed",
+  "progress": 100,
+  "file": "example_video.mp4",
+  "url": "http://localhost:8000/downloads/example_video.mp4"
+}</pre
+      >
+    </section>
+
+    <section>
+      <h2>💬 WebSocket Events (Socket.IO)</h2>
+      <p>
+        Connect to <code>ws://localhost:8000</code> and listen to these events:
+      </p>
+
+      <h3>progress</h3>
+      <pre>
+{
+  "jobId": "abc123",
+  "progress": 42
+}</pre
+      >
+
+      <h3>completed</h3>
+      <pre>
+{
+  "jobId": "abc123",
+  "url": "http://localhost:8000/downloads/example_video.mp4"
+}</pre
+      >
+
+      <h3>error</h3>
+      <pre>
+{
+  "jobId": "abc123",
+  "error": "Download failed"
+}</pre
+      >
+    </section>
+
+    <section>
+      <h2>📂 GET /downloads/:filename</h2>
+      <p>Download a video by filename.</p>
+      <h3>Example</h3>
+      <code>/downloads/example_video.mp4</code>
+      <p>Returns the video file as a direct download.</p>
+    </section>
+
+    <footer>
+      <hr />
+      <p>
+        <small
+          >Built with Node.js, Express, BullMQ, Redis, yt-dlp, and
+          Socket.IO</small
+        >
+      </p>
+    </footer>
+  </body>
+</html>
