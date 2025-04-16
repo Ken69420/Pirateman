@@ -44,3 +44,46 @@ This project is a full-stack YouTube video downloader built with **Node.js**, **
 git clone https://github.com/your-username/yt-downloader.git
 cd yt-downloader
 ```
+
+### 2. Setup environment variables
+
+- Create a .env file:
+
+APP_PORT=8000
+REDIS_HOST=redis
+REDIS_PORT=6379
+
+### 3. Run with docker compose
+
+```bash
+docker-compose up --build
+```
+
+### 4. Access the application
+
+- Open your browser and navigate to `http://localhost:8000`.
+- Use the provided interface to submit YouTube URLs and monitor download progress.
+
+---
+
+### 5. Testing the API
+
+You can test the API endpoints using tools like **Postman** or **cURL**. Example:
+
+```bash
+curl -X POST http://localhost:8000/api/download \
+-H "Content-Type: application/json" \
+-d '{"url": "https://www.youtube.com/watch?v=example"}'
+```
+
+This will enqueue a download job and return a job ID for tracking progress.
+
+---
+
+### 6. Cleaning up
+
+To stop the application and remove containers:
+
+```bash
+docker-compose down
+```
