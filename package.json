@@ -1,0 +1,36 @@
+{
+  "name": "ytdownloader",
+  "version": "1.0.0",
+  "description": "ytdownloader",
+  "keywords": [
+    "backend"
+  ],
+  "homepage": "https://github.com/HaikalAkif/zavvid-backend#readme",
+  "bugs": {
+    "url": "https://github.com/HaikalAkif/zavvid-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaikalAkif/zavvid-backend.git"
+  },
+  "license": "ISC",
+  "author": "dewn",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "dev",
+    "start": "node src/index.js",
+    "worker": "node src/worker.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.48.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "node-cron": "^3.0.3",
+    "redis": "^4.7.0",
+    "socket.io": "^4.8.1",
+    "uuidv4": "^6.2.13"
+  }
+}

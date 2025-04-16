@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YT Downloader Test</title>
+  </head>
+  <body>
+    <h2>YouTube Downloader (WebSocket Live)</h2>
+    <input type="text" id="url" placeholder="YouTube URL" />
+    <button onclick="startDownload()">Download</button>
+    <pre id="log"></pre>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const socket = io("http://localhost:8000");
+      const log = document.getElementById("log");
+
+      function startDownload() {
+        const url = document.getElementById("url").value;
+        socket.emit("download", { url });
+      }
+
+      socket.on("status", (data) => {
+        log.textContent = JSON.stringify(data, null, 2);
+      });
+    </script>
+  </body>
+</html>
