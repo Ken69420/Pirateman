@@ -1,6 +1,6 @@
 # 🎬 YouTube Downloader & Queue Processor
 
-This project is a full-stack YouTube video downloader built with **Node.js**, **Express**, **Socket.IO**, **BullMQ**, **Redis**, and **yt-dlp**. It supports real-time progress updates, async job queueing, and concurrent video processing. Perfect for downloading and managing multiple videos efficiently.
+This project is a YouTube video downloader built with **Node.js**, **Express**, **Socket.IO**, **BullMQ**, **Redis**, and **yt-dlp**. It supports real-time progress updates, async job queueing, and concurrent video processing. Perfect for downloading and managing multiple videos efficiently.
 
 ---
 
