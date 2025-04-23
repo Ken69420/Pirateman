@@ -36,22 +36,20 @@ client.on("messageCreate", async (message) => {
   try {
     // Call download Queue API
     const response = await fetch(
-      `http://localhost:8000/api/download?url=${encodeURIComponent(url)}`
+      `http://app:8000/api/download?url=${encodeURIComponent(url)}`
     );
     const { task_id } = await response.json();
 
     // Poll for the download status
     const interval = setInterval(async () => {
-      const statusRes = await fetch(
-        `http://localhost:8000/api/status/${task_id}`
-      );
+      const statusRes = await fetch(`http://app:8000/api/status/${task_id}`);
       if (!statusRes.ok) return;
 
       const status = await statusRes.json();
       if (status.status === "done") {
         clearInterval(interval);
         message.reply(
-          `Done! Your video is ready for download: [Download Link](http://localhost:8000/downloads/${status.file_name})`
+          `Done! Your video is ready for download: [Download Link](http://app:8000/downloads/${status.file_name})`
         );
       }
     }, 5000); // Poll every 5 seconds
