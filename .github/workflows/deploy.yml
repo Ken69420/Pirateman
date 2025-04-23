@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 💡 Set repo URL
-        run: echo "REPO_URL=git@github.com:${{ github.repository }}.git" >> repo.env
+      - name: 🧠 Set REPO_URL environment
+        run: echo "REPO_URL=git@github.com:${{ github.repository }}.git" >> $GITHUB_ENV
 
       - name: 🔐 Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
