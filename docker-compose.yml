@@ -29,3 +29,15 @@ services:
     image: redis:7
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
+
+  bot:
+    build: .
+    depends_on:
+      - redis
+    volumes:
+      - ./downloads:/app/downloads
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+    command: node src/bot.js

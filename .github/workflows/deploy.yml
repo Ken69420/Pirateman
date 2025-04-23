@@ -1,0 +1,36 @@
+name: 🚀 First-Time Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔐 Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Define your folder name (change if needed)
+            PROJECT_DIR=Pirateman
+            REPO_URL=git@github.com:${{ github.repository }}.git
+
+            # If project doesn't exist, clone it
+            if [ ! -d "$PROJECT_DIR" ]; then
+              echo "📦 Cloning repo..."
+              git clone $REPO_URL $PROJECT_DIR
+            fi
+
+            # Go into project, pull latest, and deploy
+            cd $PROJECT_DIR
+            git pull origin main
+            docker-compose pull
+            docker-compose up -d --build
+
+            echo "✅ First-time deployment done"
